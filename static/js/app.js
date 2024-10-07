@@ -60,6 +60,8 @@ function buildCharts(sample) {
 
   let bubbleLayout = {
     title: 'Bacteria Culturs Per Sample',
+    xaxis: {title: 'OTU ID'},
+    yaxis: {title: 'Numbers of Bacteria'},
     height: 600,
     width: 800 
 };
@@ -81,7 +83,7 @@ function buildCharts(sample) {
     // Don't forget to slice and reverse the input data appropriately
     let barLayout = {
       title: 'Top 10 Bacteria Cultures Found',
-      xlable: 'Numbers of Bacteria',
+      xaxis: {title: 'Numbers of Bacteria'},
       height: 500,
       width: 600            
   };
@@ -105,7 +107,7 @@ function init() {
     // Hint: Inside a loop, you will need to use d3 to append a new
     // option for each sample name.
     names.forEach(function(id){
-      dropdownMenu.append("option").text(id).property("value");
+      dropdownMenu.append("option").text(id).property("value", id);
   });
     
     // Get the first sample from the list
@@ -121,8 +123,8 @@ function init() {
 function optionChanged(newSample) {
   // Build charts and metadata panel each time a new sample is selected
 
-    chartvalues(newSample);
-    metadata(newSample);
+    buildCharts(newSample);
+    buildMetadata(newSample);
 };
 
 
